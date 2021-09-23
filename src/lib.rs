@@ -5,3 +5,4 @@ pub mod event;
 pub mod controller;
 pub mod constant;
 pub mod builder;
+pub mod user;
