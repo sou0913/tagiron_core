@@ -1,7 +1,6 @@
 use crate::game::Game;
 use crate::event::{ClientEvent, ServerEvent};
 use crate::command::{Command, GameCommand};
-use crate::game::initializer::GameInit;
 
 pub fn client_controller (game: &mut Game, event: ClientEvent) {
     match event {
