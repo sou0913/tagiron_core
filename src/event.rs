@@ -28,7 +28,7 @@ expected json scheme:
 }
 */
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 #[serde(tag = "type", content = "value")]
 pub enum ClientEvent {
     Select {
@@ -44,7 +44,7 @@ pub enum ClientEvent {
     },
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize)]
 #[serde(tag = "type", content = "value")]
 pub enum ServerEvent {
     Update { view: GameView },

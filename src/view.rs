@@ -4,7 +4,7 @@ use crate::game::{Game, Name, Question, QuestionState, Retired};
 use serde_derive::{Deserialize, Serialize};
 use tagiron_card::Card;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct GameView {
     players: Vec<(Name, Retired)>,
     cards: Vec<Card>,
@@ -23,7 +23,7 @@ impl GameView {
     }
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct ResultView {
     winner: String,
     cards: HashMap<String, Vec<Card>>,
