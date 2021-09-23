@@ -28,7 +28,7 @@ impl Command<Game> for GameCommand {
                 if is_collect {
                     game.set_winner(player_name.clone());
                 } else {
-                    if let Some(idx) = game.get_players().iter().position(|(name, state)| name == player_name) {
+                    if let Some(idx) = game.get_players().iter().position(|(name, _)| name == player_name) {
                         game.set_retire(idx);
                     }
                 }

@@ -4,7 +4,7 @@ use crate::command::{Command, GameCommand};
 
 pub fn client_controller (game: &mut Game, event: ClientEvent) {
     match event {
-        ClientEvent::Select { player_name, index } => {
+        ClientEvent::Select { player_name: _, index } => {
             let command = GameCommand::SelectQuestion { index };
             command.execute(game);
         }

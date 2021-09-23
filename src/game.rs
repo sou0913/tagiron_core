@@ -13,7 +13,7 @@ pub enum QuestionState {
     Used,
 }
 
-#[derive(Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Game {
     players: Vec<(Name, Retired)>,
     cards: HashMap<Name, Vec<Card>>,

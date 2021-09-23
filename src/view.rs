@@ -23,8 +23,6 @@ impl GameView {
     }
 }
 
-type Winner = bool;
-
 #[derive(Debug, Serialize)]
 pub struct ResultView {
     winner: String,
