@@ -1,6 +1,6 @@
 use crate::view::{GameView, ResultView};
-use tagiron_card::Card;
 use serde_derive::*;
+use tagiron_card::Card;
 
 /*
 expected json scheme:
@@ -22,20 +22,44 @@ pub enum ClientEvent {
     },
     Declare {
         player_name: String,
-        cards: Vec<Card>
+        cards: Vec<Card>,
     },
     Restart {
         player_names: Vec<String>,
-    }
+    },
 }
 
 #[derive(Serialize)]
 #[serde(tag = "type", content = "value")]
 pub enum ServerEvent {
-    Update {
-        view: GameView,
-    },
-    GameResult {
-        view: ResultView,
+    Update { view: GameView },
+    GameResult { view: ResultView },
+}
+
+/*
+expected json scheme:
+
+Create
+{
+    type: "Create",
+    value: {
+        name: "sasaki"
     }
+}
+
+List
+{
+    type: "List",
+    value: {
+        names: ["sasaki", "sawada"]
+    }
+}
+*/
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(tag = "type", content = "value")]
+pub enum UserEvent {
+    Create { name: String },
+    Remove { name: String },
+    List { names: Vec<String> },
 }
