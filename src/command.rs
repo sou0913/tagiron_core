@@ -10,6 +10,7 @@ pub enum GameCommand {
     GoNextTurn,
     Declare { player_name: String, cards: Vec<Card> },
     SelectQuestion { index: usize },
+    Initialize
 }
 
 impl Command<Game> for GameCommand {
@@ -34,6 +35,9 @@ impl Command<Game> for GameCommand {
             }
             GameCommand::SelectQuestion { index } => {
                 game.select_question(*index);
+            }
+            GameCommand::Initialize => {
+
             }
         }
     }

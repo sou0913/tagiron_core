@@ -4,13 +4,17 @@ use crate::command::{Command, GameCommand};
 
 pub fn client_controller (game: &mut Game, event: ClientEvent) {
     match event {
-        ClientEvent::Select { player, idx } => {
-            let command = GameCommand::SelectQuestion { index: idx };
+        ClientEvent::Select { player_name, index } => {
+            let command = GameCommand::SelectQuestion { index };
             command.execute(game);
-            return
         }
-        ClientEvent::Declare { player, cards } => {
+        ClientEvent::Declare { player_name, cards } => {
+            let command = GameCommand::Declare { player_name, cards };
+            command.execute(game);
+        }
+        ClientEvent::Restart => {
 
         }
     }
+    // ServerEvent::Update()
 }

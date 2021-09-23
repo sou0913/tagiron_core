@@ -6,13 +6,14 @@ use serde_derive::*;
 #[serde(tag = "type", content = "value")]
 pub enum ClientEvent {
     Select {
-        player: String,
-        idx: usize,
+        player_name: String,
+        index: usize,
     },
     Declare {
-        player: String,
+        player_name: String,
         cards: Vec<Card>
     },
+    Restart
 }
 
 #[derive(Serialize)]

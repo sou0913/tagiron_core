@@ -3,6 +3,8 @@ mod command;
 mod view;
 mod event;
 mod controller;
+mod constant;
+mod builder;
 
 use game::Game;
 use tagiron_card::Card;
