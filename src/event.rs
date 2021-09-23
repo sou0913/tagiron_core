@@ -1,6 +1,21 @@
 use crate::view::{GameView, ResultView};
+use serde::{Deserialize, Serialize};
 use serde_derive::*;
 use tagiron_card::Card;
+
+pub trait Event<'a>: Serialize + Deserialize<'a> {
+    fn from_str(text: impl Into<String>) {
+        serde_json::from_str(&text.into()).expect("from String error")
+    }
+
+    fn to_str(&self) -> String {
+        serde_json::to_string(self).expect("to_string error")
+    }
+}
+
+impl Event<'_> for ClientEvent {}
+
+impl Event<'_> for UserEvent {}
 
 /*
 expected json scheme:
@@ -13,7 +28,7 @@ expected json scheme:
 }
 */
 
-#[derive(Deserialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(tag = "type", content = "value")]
 pub enum ClientEvent {
     Select {
@@ -29,7 +44,7 @@ pub enum ClientEvent {
     },
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 #[serde(tag = "type", content = "value")]
 pub enum ServerEvent {
     Update { view: GameView },
@@ -56,7 +71,7 @@ List
 }
 */
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(tag = "type", content = "value")]
 pub enum UserEvent {
     Create { name: String },
