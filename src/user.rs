@@ -4,3 +4,9 @@ use serde_derive::{Serialize, Deserialize};
 pub struct User {
     name: String
 }
+
+impl User {
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
+}
