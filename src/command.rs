@@ -1,4 +1,4 @@
-use crate::game::Game;
+use crate::game::{Game, initializer::GameInit};
 use itertools::Itertools;
 use tagiron_card::Card;
 
@@ -10,7 +10,7 @@ pub enum GameCommand {
     GoNextTurn,
     Declare { player_name: String, cards: Vec<Card> },
     SelectQuestion { index: usize },
-    Initialize
+    Initialize { player_names: Vec<String> }
 }
 
 impl Command<Game> for GameCommand {
@@ -36,8 +36,8 @@ impl Command<Game> for GameCommand {
             GameCommand::SelectQuestion { index } => {
                 game.select_question(*index);
             }
-            GameCommand::Initialize => {
-
+            GameCommand::Initialize { player_names } => {
+                game.init(player_names.to_owned());
             }
         }
     }

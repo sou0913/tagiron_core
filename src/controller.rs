@@ -1,6 +1,7 @@
 use crate::game::Game;
 use crate::event::{ClientEvent, ServerEvent};
 use crate::command::{Command, GameCommand};
+use crate::game::initializer::GameInit;
 
 pub fn client_controller (game: &mut Game, event: ClientEvent) {
     match event {
@@ -12,8 +13,9 @@ pub fn client_controller (game: &mut Game, event: ClientEvent) {
             let command = GameCommand::Declare { player_name, cards };
             command.execute(game);
         }
-        ClientEvent::Restart => {
-
+        ClientEvent::Restart { player_names } => {
+            let command = GameCommand::Initialize { player_names };
+            command.execute(game);
         }
     }
     // ServerEvent::Update()

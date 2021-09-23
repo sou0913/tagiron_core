@@ -96,3 +96,64 @@ impl Game {
         self.winner = Some(name);
     }
 }
+
+pub mod initializer {
+    use crate::builder::{build_cards, build_questions, chunk_cards};
+    use crate::game::{Game, QuestionState};
+    use crate::{game::Name};
+    use rand::seq::SliceRandom;
+    use rand::thread_rng;
+
+    pub trait GameInit {
+        fn init(&mut self, players: Vec<Name>);
+    }
+
+    impl GameInit for Game {
+        fn init(&mut self, players: Vec<Name>) {
+            const OPENING_QUESTION_COUNT: usize = 5;
+
+            let mut rng = thread_rng();
+
+            let mut cards = build_cards();
+            cards.shuffle(&mut rng);
+            let mut questions = build_questions();
+            questions.shuffle(&mut rng);
+
+            let per = match players.len() {
+                3 => 5,
+                4 => 4,
+                _ => panic!("The count of players must be 3 or 4."),
+            };
+            let chunks = chunk_cards(cards, per);
+
+            let cards = players
+                .clone()
+                .into_iter()
+                .zip(chunks.clone().into_iter().take(players.len()))
+                .collect();
+            let players = players
+                .iter()
+                .map(|name| (name.to_owned(), false))
+                .collect();
+            let answer = chunks.iter().last().unwrap().to_owned();
+            let mut questions: Vec<(String, QuestionState)> = questions
+                .iter()
+                .map(|q| (q.to_owned(), QuestionState::Reversed))
+                .collect();
+            questions.iter_mut().zip(1..).for_each(|(tup, i)| {
+                if i <= OPENING_QUESTION_COUNT {
+                    tup.1 = QuestionState::Opened
+                }
+            });
+            let winner = None;
+
+            *self = Game {
+                players,
+                cards,
+                answer,
+                questions,
+                winner,
+            };
+        }
+    }
+}

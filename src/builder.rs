@@ -1,7 +1,7 @@
-use crate::constant::QUESTION_TEXTS;
 use crate::game::Question;
-use itertools::Itertools;
+use crate::{constant::QUESTION_TEXTS};
 use tagiron_card::{make_cards, Card};
+use itertools::Itertools;
 
 pub fn build_questions() -> Vec<Question> {
     QUESTION_TEXTS.map(|s| s.to_string()).to_vec()
