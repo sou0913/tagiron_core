@@ -83,16 +83,12 @@ List
 pub enum UserEvent {
     Create { name: String },
     Remove { name: String },
-    List,
+    List { names: String },
 }
 
-struct List {
-    names: Vec<String>,
-}
-
-impl List {
-    pub fn from_users(users: Vec<User>) -> Self {
-        Self {
+impl UserEvent {
+    pub fn from_users(users: Vec<User>) -> UserEvent {
+        UserEvent::List {
             names: users
                 .iter()
                 .map(|user| user.get_name().to_owned())
