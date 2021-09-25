@@ -6,8 +6,8 @@ pub struct User {
 }
 
 impl User {
-    pub fn new(name: String) -> Self {
-        User { name }
+    pub fn new(name: &str) -> Self {
+        User { name: name.to_owned() }
     }
 
     pub fn get_name(&self) -> &str {
