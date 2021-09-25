@@ -6,6 +6,10 @@ pub struct User {
 }
 
 impl User {
+    pub fn new(name: String) -> Self {
+        User { name }
+    }
+
     pub fn get_name(&self) -> &str {
         &self.name
     }
