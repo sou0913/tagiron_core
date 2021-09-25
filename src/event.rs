@@ -1,13 +1,12 @@
-use crate::view::{GameView, ResultView};
+use crate::{
+    user::User,
+    view::{GameView, ResultView},
+};
 use serde::{Deserialize, Serialize};
 use serde_derive::*;
 use tagiron_card::Card;
 
 pub trait Event<'a>: Serialize + Deserialize<'a> {
-    fn from_str(text: impl Into<String>) {
-        serde_json::from_str(&text.into()).expect("from String error")
-    }
-
     fn to_str(&self) -> String {
         serde_json::to_string(self).expect("to_string error")
     }
@@ -62,6 +61,14 @@ Create
     }
 }
 
+Remove
+{
+    type: "Remove",
+    value: {
+        name: "sasaki"
+    }
+}
+
 List
 {
     type: "List",
@@ -76,5 +83,20 @@ List
 pub enum UserEvent {
     Create { name: String },
     Remove { name: String },
-    List { names: Vec<String> },
+    List,
+}
+
+struct List {
+    names: Vec<String>,
+}
+
+impl List {
+    pub fn from_users(users: Vec<User>) -> Self {
+        Self {
+            names: users
+                .iter()
+                .map(|user| user.get_name().to_owned())
+                .collect(),
+        }
+    }
 }
