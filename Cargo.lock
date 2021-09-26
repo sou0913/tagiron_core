@@ -164,16 +164,6 @@ dependencies = [
  "serde",
  "serde_derive",
  "serde_json",
- "tagiron_card",
-]
-
-[[package]]
-name = "tagiron_card"
-version = "0.1.1"
-source = "git+https://github.com/sou0913/tagiron_card.git#0cedbcc36ef8571a1ce5d1e0f2ecdd8060ed2950"
-dependencies = [
- "serde",
- "serde_derive",
 ]
 
 [[package]]

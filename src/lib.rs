@@ -6,3 +6,4 @@ pub mod controller;
 pub mod constant;
 pub mod builder;
 pub mod user;
+pub mod card;

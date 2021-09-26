@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::game::{Game, Name, Question, QuestionState, Retired};
 use serde_derive::{Deserialize, Serialize};
-use tagiron_card::Card;
+use crate::card::Card;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct GameView {

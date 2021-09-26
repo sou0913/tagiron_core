@@ -1,6 +1,6 @@
 use crate::game::Question;
 use crate::{constant::QUESTION_TEXTS};
-use tagiron_card::{make_cards, Card};
+use crate::card::{make_cards, Card};
 use itertools::Itertools;
 
 pub fn build_questions() -> Vec<Question> {

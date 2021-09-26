@@ -1,6 +1,6 @@
 use serde_derive::{Deserialize, Serialize};
 use std::collections::HashMap;
-use tagiron_card::Card;
+use crate::card::Card;
 
 pub type Question = String;
 pub type Retired = bool;

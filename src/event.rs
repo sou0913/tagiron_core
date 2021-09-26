@@ -4,7 +4,7 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 use serde_derive::*;
-use tagiron_card::Card;
+use crate::card::Card;
 
 pub trait Event<'a>: Serialize + Deserialize<'a> {
     fn to_str(&self) -> String {

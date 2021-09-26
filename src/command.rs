@@ -1,6 +1,6 @@
 use crate::game::{Game, initializer::GameInit};
 use itertools::Itertools;
-use tagiron_card::Card;
+use crate::card::Card;
 
 pub trait Command<T> {
     fn execute(&self, t: &mut T);
